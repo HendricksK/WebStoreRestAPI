@@ -7,8 +7,8 @@
 package com.hendricks.musicwebstore2.test.services;
 
 import com.hendricks.musicstoreweb2.app.conf.ConnectionConfig;
-import com.hendricks.musicstoreweb2.repository.AlbumRepository;
-import com.hendricks.musicstoreweb2.services.FindAlbumService;
+import com.hendricks.musicstoreweb2.repository.VinylRepository;
+import com.hendricks.musicstoreweb2.services.AddVinylService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.testng.Assert;
@@ -23,24 +23,24 @@ import org.testng.annotations.Test;
  *
  * @author kurvin
  */
-public class FindAlbumTest {
+public class AddVinylServiceTest {
     private static ApplicationContext ctx;
-    private AlbumRepository repo;
-    private FindAlbumService service;
+    private static VinylRepository repo;
+    private AddVinylService service;
     
-    public FindAlbumTest() {
+    public AddVinylServiceTest() {
     }
 
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
      @Test
-     public void findAlbum() {
-        service = ctx.getBean(FindAlbumService.class);
-        repo = ctx.getBean(AlbumRepository.class);
-        String album = service.findAlbum("The Suffer & The Witness");
+     public void vinyl() {
+        service = ctx.getBean(AddVinylService.class);
+        repo = ctx.getBean(VinylRepository.class);
+        boolean check = service.addMusic("Get a Grip");
         repo.deleteAll();
-        Assert.assertEquals(album, "The Suffer & The Witness");
+        Assert.assertEquals(check, true);
      }
 
     @BeforeClass
