@@ -12,12 +12,14 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -30,37 +32,53 @@ public class ProductPurchase {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long ID;
     private Date date;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "cd_purchases")
-    List<PurchaseCD> cdPurchases = new ArrayList();
-    @OneToMany(cascade = CascadeType.ALL)
+    List<PurchaseCD> cdPurchases;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "device_purchases")
-    List<PurchaseDevice> devicePurchases = new ArrayList();
-    @OneToMany(cascade = CascadeType.ALL)
+    List<PurchaseDevice> devicePurchases;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "dg_purchases")
-    List<PurchaseDigitalMedia> dgPurchases = new ArrayList();
-    @OneToMany(cascade = CascadeType.ALL)
+    List<PurchaseDigitalMedia> dgPurchases;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "v_purchases")
-    List<PurchaseVinyl> vinylPurchases = new ArrayList();
-    @OneToMany(cascade = CascadeType.ALL)
+    List<PurchaseVinyl> vinylPurchases;
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "card_purchases")
-    List<Card> cardPurchases;
-    @OneToMany(cascade = CascadeType.ALL)
+    Card cardPurchases;
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cash_purchases")
-    List<Cash> cashPurchases;
-    @OneToMany(cascade = CascadeType.ALL)
+    Cash cashPurchases;
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cheque_purchases")
-    List<Cheque> chequePurchases;
+    Cheque chequePurchases;
     
     
     private ProductPurchase(){};
     
     private ProductPurchase(ProductPurchase item){
         this.ID = item.ID;
+        this.cardPurchases = item.cardPurchases;
+        this.cashPurchases = item.cashPurchases;
+        this.cdPurchases = item.cdPurchases;
+        this.chequePurchases = item.chequePurchases;
+        this.date = item.date;
+        this.devicePurchases = item.devicePurchases;
+        this.dgPurchases = item.dgPurchases;
+        this.vinylPurchases = item.vinylPurchases;
     }
     
     private ProductPurchase(Builder p){
         this.ID = p.ID;
+         this.cardPurchases = p.cardPurchases;
+        this.cashPurchases = p.cashPurchases;
+        this.cdPurchases = p.cdPurchases;
+        this.chequePurchases = p.chequePurchases;
+        this.date = p.date;
+        this.devicePurchases = p.devicePurchases;
+        this.dgPurchases = p.dgPurchases;
+        this.vinylPurchases = p.vinylPurchases;
     }
 
     public Long getID() {
@@ -90,13 +108,13 @@ public class ProductPurchase {
     public static class Builder{
         private Long ID;
         private Date date;
-        private List<PurchaseCD> cdPurchases = new ArrayList();
-        private List<PurchaseDevice> devicePurchases = new ArrayList();
-        private List<PurchaseDigitalMedia> dgPurchases = new ArrayList();
-        private List<PurchaseVinyl> vinylPurchases = new ArrayList();
-        private List<Card> cardPurchases;
-        private List<Cash> cashPurchases;
-        private List<Cheque> chequePurchases;
+        private List<PurchaseCD> cdPurchases;
+        private List<PurchaseDevice> devicePurchases;
+        private List<PurchaseDigitalMedia> dgPurchases;
+        private List<PurchaseVinyl> vinylPurchases;
+        private Card cardPurchases;
+        private Cash cashPurchases;
+        private Cheque chequePurchases;
         
         public Builder(Date d){
             this.date = d;
@@ -122,23 +140,21 @@ public class ProductPurchase {
             return this;
         }
 
-        public Builder setCardPurchases(List<Card> cardPurchases) {
+        public Builder setCardPurchases(Card cardPurchases) {
             this.cardPurchases = cardPurchases;
             return this;
         }
 
-        public Builder setCashPurchases(List<Cash> cashPurchases) {
+        public Builder setCashPurchases(Cash cashPurchases) {
             this.cashPurchases = cashPurchases;
             return this;
         }
 
-        public Builder setChequePurchases(List<Cheque> chequePurchases) {
+        public Builder setChequePurchases(Cheque chequePurchases) {
             this.chequePurchases = chequePurchases;
             return this;
         }
-        
-        
-        
+
         public Builder ProductPurchase(ProductPurchase pp){
             this.ID = pp.ID;
             this.cdPurchases = pp.cdPurchases;

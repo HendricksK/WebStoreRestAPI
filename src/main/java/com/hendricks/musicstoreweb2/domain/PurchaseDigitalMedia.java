@@ -23,6 +23,7 @@ public class PurchaseDigitalMedia {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long ID;
     private Double price;
+    private String name;
 
     private PurchaseDigitalMedia() {
     }
@@ -32,20 +33,28 @@ public class PurchaseDigitalMedia {
     private PurchaseDigitalMedia(PurchaseDigitalMedia item) {
         this.ID = item.ID;
         this.price = item.price;
+        this.name = item.name;
     }
 
     private PurchaseDigitalMedia(Builder item) {
         this.ID = item.ID;
         this.price = item.price;
+        this.name = item.name;
     }
 
     public static class Builder {
 
         private Long ID;
         private Double price;
+        private String name;
 
         public Builder setPrice(Double price) {
             this.price = price;
+            return this;
+        }
+
+        public Builder setName(String name) {
+            this.name = name;
             return this;
         }
 
@@ -64,6 +73,12 @@ public class PurchaseDigitalMedia {
     public Double getPrice() {
         return price;
     }
+
+    public String getName() {
+        return name;
+    }
+    
+    
 
     @Override
     public int hashCode() {

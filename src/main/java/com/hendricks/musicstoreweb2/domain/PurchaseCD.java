@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.hendricks.musicstoreweb2.domain;
 
 import java.util.Date;
@@ -19,49 +18,63 @@ import javax.persistence.Id;
  */
 @Entity
 public class PurchaseCD {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long ID;
     private Double price;
-    
-    private PurchaseCD(){};
-    
-    private PurchaseCD(PurchaseCD item){
-        this.ID = item.ID;
-        this.price = item.price;
-    }
-    
-    private PurchaseCD(Builder item){
-        this.ID = item.ID;
-        this.price = item.price;
-    }
-    
-        public static class Builder{
-            
-            private Long ID;
-            private Double price;
-            
-            public Builder(Double price){
-                this.price = price;
-            }
-            
-            public Builder setPrice(Double price){
-                this.price = price;
-                return this;
-            }
-            
-            public Builder PurchaseCD(PurchaseCD item){
-                this.ID = item.ID;
-                this.price = item.price;
-                return this;
-            }
-            
-            public PurchaseCD build(){
-                return new PurchaseCD(this);
-            }
+    private String name;
 
+    private PurchaseCD() {
+    }
+
+    ;
+    
+    private PurchaseCD(PurchaseCD item) {
+        this.ID = item.ID;
+        this.price = item.price;
+        this.name = item.name;
+    }
+
+    private PurchaseCD(Builder item) {
+        this.ID = item.ID;
+        this.price = item.price;
+        this.name = item.name;
+    }
+
+    public static class Builder {
+
+        private Long ID;
+        private Double price;
+        private String name;
+
+        public Builder(Double price) {
+            this.price = price;
         }
+
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder setPrice(Double price) {
+            this.price = price;
+            return this;
+        }
+
+        public Builder PurchaseCD(PurchaseCD item) {
+            this.ID = item.ID;
+            this.price = item.price;
+            this.name = item.name;
+            return this;
+        }
+
+        public PurchaseCD build() {
+            return new PurchaseCD(this);
+        }
+
+    }
 
     public Long getID() {
         return ID;
@@ -69,6 +82,10 @@ public class PurchaseCD {
 
     public Double getPrice() {
         return price;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -92,6 +109,5 @@ public class PurchaseCD {
         }
         return true;
     }
-    
-    
+
 }

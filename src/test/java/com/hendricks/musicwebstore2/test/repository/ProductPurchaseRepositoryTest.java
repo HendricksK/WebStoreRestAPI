@@ -79,9 +79,12 @@ public class ProductPurchaseRepositoryTest {
          List<PurchaseDevice> dPurchaces = new ArrayList<>();
          List<PurchaseDigitalMedia> dmPurchases = new ArrayList<>();
          List<PurchaseVinyl> vPurchases = new ArrayList<>();
-         List<Card> cardMethod = new ArrayList<>();
-         List<Cash> cashMethod = new ArrayList<>();
-         List<Cheque> cheque = new ArrayList<>();
+         Card cardMethod = new Card.Builder("123456789")
+                 .build();
+         Cash cashMethod = new Cash.Builder("Cash")
+                 .build();
+         Cheque cheque = new Cheque.Builder("003164")
+                 .build();
          
          
          ProductPurchase update = new ProductPurchase.Builder(p.getDate())

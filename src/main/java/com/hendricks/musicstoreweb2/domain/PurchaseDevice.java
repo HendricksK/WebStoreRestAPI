@@ -22,6 +22,7 @@ public class PurchaseDevice {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long ID;
+    private String name;
     private Double price;
 
     private PurchaseDevice() {
@@ -32,17 +33,20 @@ public class PurchaseDevice {
     private PurchaseDevice(PurchaseDevice item) {
         this.ID = item.ID;
         this.price = item.price;
+        this.name = item.name;
     }
 
     private PurchaseDevice(Builder item) {
         this.ID = item.ID;
         this.price = item.price;
+        this.name = item.name;
     }
 
     public static class Builder {
 
         private Long ID;
         private Double price;
+        private String name;
 
 
         public Builder setPrice(Double price) {
@@ -50,9 +54,15 @@ public class PurchaseDevice {
             return this;
         }
 
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
         public Builder PurchaseDevice(PurchaseDevice item) {
             this.ID = item.ID;
             this.price = item.price;
+            this.name = item.name;
             return this;
         }
 
@@ -64,6 +74,10 @@ public class PurchaseDevice {
 
     public Double getPrice() {
         return price;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override
