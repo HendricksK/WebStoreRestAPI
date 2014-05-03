@@ -30,6 +30,7 @@ public class CD implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String artist;
+    private Double price;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "cd")
     List<Song> songList;
@@ -41,18 +42,21 @@ public class CD implements Serializable {
         this.artist = item.artist;
         this.id = item.id;
         this.songList = item.songList;
+        this.price = item.price;
     }
 
     private CD(Builder item) {
         this.artist = item.artist;
         this.id = item.id;
         this.songList = item.songList;
+        this.price = item.price;
     }
 
     public static class Builder {
 
         private Long id;
         private String artist;
+        private Double price;
         List<Song> songList;
 
         public Builder(String artist) {
@@ -61,6 +65,11 @@ public class CD implements Serializable {
 
         public Builder setArtist(String artist) {
             this.artist = artist;
+            return this;
+        }
+
+        public Builder setPrice(Double price) {
+            this.price = price;
             return this;
         }
 
