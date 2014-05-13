@@ -6,10 +6,14 @@
 
 package com.hendricks.musicstoreweb2.services;
 
+import com.hendricks.musicstoreweb2.domain.DigitalMusic;
+import com.hendricks.musicstoreweb2.domain.Song;
+import java.util.List;
+
 /**
  *
  * @author kurvin
  */
-public interface AddDigitalMusicService {
-    boolean addMusic(String album);
+public interface AddDigitalMusicService extends Services<DigitalMusic, Long>{
+    boolean addMusic(List<Song> songs, Double price, String artist);
 }

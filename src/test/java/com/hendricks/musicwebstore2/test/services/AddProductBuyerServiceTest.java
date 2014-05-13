@@ -6,9 +6,13 @@
 
 package com.hendricks.musicwebstore2.test.services;
 
-import com.hendricks.musicstoreweb2.app.conf.ConnectionConfig;
+import com.hendricks.musicstoreweb2.domain.DeviceSupplier;
+import com.hendricks.musicstoreweb2.domain.MediaSupplier;
 import com.hendricks.musicstoreweb2.repository.ProductBuyerRepository;
 import com.hendricks.musicstoreweb2.services.AddProductBuyerService;
+import com.hendricks.musicwebstore2.test.ConnectionConfigTest;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.testng.Assert;
@@ -39,14 +43,16 @@ public class AddProductBuyerServiceTest {
      public void productBuyer() {
          service = ctx.getBean(AddProductBuyerService.class);
          repo = ctx.getBean(ProductBuyerRepository.class);
-         boolean check = service.addManager("Matthew Grayson");
+         List<DeviceSupplier> dList= new ArrayList();
+         List<MediaSupplier> mList = new ArrayList();
+         boolean check = service.addManager("Matthew Grayson", dList, mList);
          repo.deleteAll();
          Assert.assertEquals(check, true);
      }
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        ctx = new AnnotationConfigApplicationContext(ConnectionConfig.class);
+        ctx = new AnnotationConfigApplicationContext(ConnectionConfigTest.class);
     }
 
     @AfterClass

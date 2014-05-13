@@ -6,7 +6,7 @@
 
 package com.hendricks.musicwebstore2.test.services;
 
-import com.hendricks.musicstoreweb2.app.conf.ConnectionConfig;
+import com.hendricks.musicwebstore2.test.ConnectionConfigTest;
 import com.hendricks.musicstoreweb2.repository.ArtistRepository;
 import com.hendricks.musicstoreweb2.services.AddArtistService;
 import org.springframework.context.ApplicationContext;
@@ -38,14 +38,13 @@ public class AddArtistServiceTest {
      public void artist() {
         service = ctx.getBean(AddArtistService.class);
         repo = ctx.getBean(ArtistRepository.class);
-        boolean check = service.addMusic("Red Hot Chilli Peppers");
-        repo.deleteAll();
+        boolean check = service.addMusic("Red Hot Chilli Peppers", "Californication", "Rock", "Flea");
         Assert.assertEquals(check, true);
      }
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        ctx = new AnnotationConfigApplicationContext(ConnectionConfig.class);
+        ctx = new AnnotationConfigApplicationContext(ConnectionConfigTest.class);
     }
 
     @AfterClass
@@ -58,5 +57,7 @@ public class AddArtistServiceTest {
 
     @AfterMethod
     public void tearDownMethod() throws Exception {
+        repo = ctx.getBean(ArtistRepository.class);
+        repo.deleteAll();
     }
 }

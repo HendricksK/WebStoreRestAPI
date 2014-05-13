@@ -6,9 +6,12 @@
 
 package com.hendricks.musicwebstore2.test.services;
 
-import com.hendricks.musicstoreweb2.app.conf.ConnectionConfig;
+import com.hendricks.musicstoreweb2.domain.Song;
 import com.hendricks.musicstoreweb2.repository.VinylRepository;
 import com.hendricks.musicstoreweb2.services.AddVinylService;
+import com.hendricks.musicwebstore2.test.ConnectionConfigTest;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.testng.Assert;
@@ -38,14 +41,15 @@ public class AddVinylServiceTest {
      public void vinyl() {
         service = ctx.getBean(AddVinylService.class);
         repo = ctx.getBean(VinylRepository.class);
-        boolean check = service.addMusic("Get a Grip");
+        List<Song> songs = new ArrayList();
+        boolean check = service.addMusic(songs, 89.95, "Aerosmith");
         repo.deleteAll();
         Assert.assertEquals(check, true);
      }
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        ctx = new AnnotationConfigApplicationContext(ConnectionConfig.class);
+        ctx = new AnnotationConfigApplicationContext(ConnectionConfigTest.class);
     }
 
     @AfterClass

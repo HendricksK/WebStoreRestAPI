@@ -7,7 +7,7 @@
 package com.hendricks.musicwebstore2.test.repository;
 
 
-import com.hendricks.musicstoreweb2.app.conf.ConnectionConfig;
+import com.hendricks.musicwebstore2.test.ConnectionConfigTest;
 import com.hendricks.musicstoreweb2.domain.DigitalMusic;
 import com.hendricks.musicstoreweb2.domain.Song;
 import com.hendricks.musicstoreweb2.repository.DigitalMusicRepository;
@@ -91,7 +91,7 @@ public class DigitalMusicRepositoryTest {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        ctx = new AnnotationConfigApplicationContext(ConnectionConfig.class);
+        ctx = new AnnotationConfigApplicationContext(ConnectionConfigTest.class);
     }
 
     @AfterClass

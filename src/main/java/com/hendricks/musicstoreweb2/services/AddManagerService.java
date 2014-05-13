@@ -6,10 +6,14 @@
 
 package com.hendricks.musicstoreweb2.services;
 
+import com.hendricks.musicstoreweb2.domain.Manager;
+import com.hendricks.musicstoreweb2.domain.ProductBuyer;
+import java.util.List;
+
 /**
  *
  * @author kurvin
  */
-public interface AddManagerService {
-    boolean addManager(String name);
+public interface AddManagerService extends Services<Manager, Long>{
+    boolean addManager(String name, List<ProductBuyer> buyers);
 }

@@ -6,10 +6,12 @@
 
 package com.hendricks.musicstoreweb2.services;
 
+import com.hendricks.musicstoreweb2.domain.ListeningStation;
+
 /**
  *
  * @author kurvin
  */
-public interface AddMusicListeningStationService {
+public interface AddMusicListeningStationService extends Services <ListeningStation, Long>{
     boolean addMusic(String album);
 }

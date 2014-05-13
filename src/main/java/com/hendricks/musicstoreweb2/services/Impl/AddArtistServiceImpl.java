@@ -28,23 +28,23 @@ private ArtistRepository repo;
 private Long id;
 
     @Override
-    public boolean addMusic(String name) {
+    public boolean addMusic(String Band, String albumName, String genre, String artistNames) {
         List <Album> albums = new ArrayList<>();
-        Album a = new Album.Builder("Downtown Battle Mountain II")
+        Album a = new Album.Builder(albumName)
                 .build();
         
         albums.add(a);
         
-        Genre g = new Genre.Builder("Post Hardcore")
+        Genre g = new Genre.Builder(genre)
                 .build();
         
-        Artist artist = new Artist.Builder(name)
-                .setName("Will Swan, Tilian")
+        Artist artist = new Artist.Builder(Band)
+                .setName(artistNames)
                 .setGenre(g)
                .setAlbums(albums)
                 .build();
         
-        Artist a2 = new Artist.Builder(name)
+        Artist a2 = new Artist.Builder(Band)
                 .build();
         
         repo.save(artist);
@@ -55,6 +55,34 @@ private Long id;
         if(artist.equals(artist2))
             return true;
         else return false;
+    }
+
+    @Override
+    public Artist find(Long id) {
+       return repo.findOne(id);
+    }
+
+    @Override
+    public Artist persists(Artist entity) {
+        return repo.save(entity);
+    }
+
+    @Override
+    public Artist merge(Artist entity) {
+        if (entity.getId()!=null) {
+            return repo.save(entity);
+        }
+        return null;
+        }
+    
+    @Override
+    public void remove(Artist entity) {
+       repo.delete(entity);
+    }
+
+    @Override
+    public List<Artist> findAll() {
+       return repo.findAll();
     }
     
 }

@@ -29,6 +29,8 @@ public class DigitalMusic implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String artist;
+    private Double price;
+    private 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER) // this is to ensure the database initializes the lists
     @JoinColumn(name = "digital")
     List<Song> songList;
@@ -39,6 +41,14 @@ public class DigitalMusic implements Serializable {
         this.artist = dm.artist;
         this.id = dm.id;
         this.songList = dm.songList;
+        this.price = dm.price;
+    }
+    
+    public DigitalMusic(DigitalMusic dm){
+        this.artist = dm.artist;
+        this.id = dm.id;
+        this.songList = dm.songList;
+        this.price = dm.price;
     }
 
     public Long getId() {
@@ -52,11 +62,16 @@ public class DigitalMusic implements Serializable {
     public List<Song> getSongList() {
         return songList;
     }
+
+    public Double getPrice() {
+        return price;
+    }
     
     public static class Builder{
         private Long id;
         private String artist;
         List<Song> songList;
+        private Double price;
         
         public Builder(String artist){
             this.artist = artist;
@@ -69,6 +84,11 @@ public class DigitalMusic implements Serializable {
 
         public Builder setSongList(List<Song> songList) {
             this.songList = songList;
+            return this;
+        }
+        
+        public Builder setPrice(Double Price){
+            this.price = Price;
             return this;
         }
         

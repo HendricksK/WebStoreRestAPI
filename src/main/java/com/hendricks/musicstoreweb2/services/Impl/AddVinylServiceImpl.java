@@ -10,7 +10,6 @@ import com.hendricks.musicstoreweb2.domain.Song;
 import com.hendricks.musicstoreweb2.domain.Vinyl;
 import com.hendricks.musicstoreweb2.repository.VinylRepository;
 import com.hendricks.musicstoreweb2.services.AddVinylService;
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,16 +25,10 @@ private VinylRepository repo;
 private Long id;
 
     @Override
-    public boolean addMusic(String album) {
-       List<Song> songs = new ArrayList<>();
+    public boolean addMusic(List<Song> songs, Double price, String artist) {
         
-        Song s = new Song.Builder(6)
-                .setTitle("Don't Pray For me")
-                .build();
         
-        songs.add(s);
-        
-        Vinyl v1 = new Vinyl.Builder(album)
+        Vinyl v1 = new Vinyl.Builder(artist)
                 .setSongList(songs)
                 .build();
         
@@ -47,6 +40,35 @@ private Long id;
             if(v2.equals(v1))
                 return true;
             else return false;
+    }
+
+    @Override
+    public Vinyl find(Long id) {
+       return repo.findOne(id);
+    }
+
+    @Override
+    public Vinyl persists(Vinyl entity) {
+        return repo.save(entity);
+    }
+
+    @Override
+    public Vinyl merge(Vinyl entity) {
+            return repo.save(entity);
+            /*if(entity.getID()!=null){return repo.save(entity);}
+            else return null
+            */
+    }
+    
+
+    @Override
+    public void remove(Vinyl entity) {
+       repo.delete(entity);
+    }
+
+    @Override
+    public List<Vinyl> findAll() {
+        return repo.findAll();
     }
     
 }

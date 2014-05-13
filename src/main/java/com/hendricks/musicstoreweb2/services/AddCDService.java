@@ -6,10 +6,14 @@
 
 package com.hendricks.musicstoreweb2.services;
 
+import com.hendricks.musicstoreweb2.domain.CD;
+import com.hendricks.musicstoreweb2.domain.Song;
+import java.util.List;
+
 /**
  *
  * @author kurvin
  */
-public interface AddCDService {
-    boolean addMusic(String album);
+public interface AddCDService extends Services<CD, Long>{
+    boolean addMusic(List<Song> songs, Double price, String artist);
 }

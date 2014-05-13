@@ -6,9 +6,12 @@
 
 package com.hendricks.musicwebstore2.test.services;
 
-import com.hendricks.musicstoreweb2.app.conf.ConnectionConfig;
+import com.hendricks.musicstoreweb2.domain.Song;
 import com.hendricks.musicstoreweb2.repository.DigitalMusicRepository;
 import com.hendricks.musicstoreweb2.services.AddDigitalMusicService;
+import com.hendricks.musicwebstore2.test.ConnectionConfigTest;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.testng.Assert;
@@ -38,14 +41,15 @@ public class AddDigitalMusicServiceTest {
      public void hello() {
         service = ctx.getBean(AddDigitalMusicService.class);
         repo = ctx.getBean(DigitalMusicRepository.class);
-        boolean check = service.addMusic("Armageddon");
+        List<Song> songs = new ArrayList();
+        boolean check = service.addMusic(songs, 78.45, "Armageddon");
         repo.deleteAll();
         Assert.assertEquals(check, true);
      }
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        ctx = new AnnotationConfigApplicationContext(ConnectionConfig.class);
+        ctx = new AnnotationConfigApplicationContext(ConnectionConfigTest.class);
     }
 
     @AfterClass

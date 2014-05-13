@@ -6,9 +6,12 @@
 
 package com.hendricks.musicwebstore2.test.services;
 
-import com.hendricks.musicstoreweb2.app.conf.ConnectionConfig;
+import com.hendricks.musicstoreweb2.domain.ProductBuyer;
 import com.hendricks.musicstoreweb2.repository.ManagerRepository;
 import com.hendricks.musicstoreweb2.services.AddManagerService;
+import com.hendricks.musicwebstore2.test.ConnectionConfigTest;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.testng.Assert;
@@ -39,14 +42,16 @@ public class AddManagerServiceTest {
      public void manager() {
          service = ctx.getBean(AddManagerService.class);
          repo =ctx.getBean(ManagerRepository.class);
-         boolean check = service.addManager("Daniel Manfred");
-         repo.deleteAll();
+         List<ProductBuyer> buyers = new ArrayList();
+         ProductBuyer b = new ProductBuyer.Builder("Geoffe Manfred").build();
+         buyers.add(b);
+         boolean check = service.addManager("Daniel Manfred", buyers);
          Assert.assertEquals(check, true);
      }
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        ctx = new AnnotationConfigApplicationContext(ConnectionConfig.class);
+        ctx = new AnnotationConfigApplicationContext(ConnectionConfigTest.class);
     }
 
     @AfterClass
@@ -59,5 +64,7 @@ public class AddManagerServiceTest {
 
     @AfterMethod
     public void tearDownMethod() throws Exception {
+        repo =ctx.getBean(ManagerRepository.class);
+        repo.deleteAll();
     }
 }

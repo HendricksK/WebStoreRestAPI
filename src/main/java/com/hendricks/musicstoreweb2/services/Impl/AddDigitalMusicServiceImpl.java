@@ -27,17 +27,11 @@ public class AddDigitalMusicServiceImpl implements AddDigitalMusicService{
     private Long id;
 
     @Override
-    public boolean addMusic(String album) {
-       List<Song> songs = new ArrayList<>();
+    public boolean addMusic(List<Song> songs, Double price, String artist) {
         
-        Song s  = new Song.Builder(1)
-                .setTitle(album)
-                .build();
-        
-        songs.add(s);
-        
-        DigitalMusic dm = new DigitalMusic.Builder("Wolfmother")
+        DigitalMusic dm = new DigitalMusic.Builder(artist)
                 .setSongList(songs)
+                .setPrice(price)
                 .build();
         
         repo.save(dm);
@@ -49,6 +43,33 @@ public class AddDigitalMusicServiceImpl implements AddDigitalMusicService{
             return true;
         else
             return false;
+    }
+
+    @Override
+    public DigitalMusic find(Long id) {
+        return repo.findOne(id);
+    }
+
+    @Override
+    public DigitalMusic persists(DigitalMusic entity) {
+        return repo.save(entity);
+    }
+
+    @Override
+    public DigitalMusic merge(DigitalMusic entity) {
+        if(entity.getId()!=null){
+            return repo.save(entity);
+        }else return null;
+    }
+
+    @Override
+    public void remove(DigitalMusic entity) {
+       repo.delete(entity);
+    }
+
+    @Override
+    public List<DigitalMusic> findAll() {
+        return repo.findAll();
     }
     
 }

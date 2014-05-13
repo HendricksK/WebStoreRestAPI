@@ -30,6 +30,7 @@ public class Vinyl implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String artist;
+    private Double price;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "vinyl")
     List<Song> songList;
@@ -41,12 +42,14 @@ public class Vinyl implements Serializable {
         this.artist = item.artist;
         this.id = item.id;
         this.songList = item.songList;
+        this.price = item.price;
     }
 
     public Vinyl(Builder item) {
         this.artist = item.artist;
         this.id = item.id;
         this.songList = item.songList;
+        this.price = item.price;
     }
 
     public static class Builder {
@@ -54,6 +57,7 @@ public class Vinyl implements Serializable {
         private Long id;
         private String artist;
         List<Song> songList;
+        Double price;
 
         public Builder(String artist) {
             this.artist = artist;
@@ -61,6 +65,11 @@ public class Vinyl implements Serializable {
 
         public Builder setSongList(List<Song> songList) {
             this.songList = songList;
+            return this;
+        }
+        
+        public Builder setPrice(Double price){
+            this.price = price;
             return this;
         }
 

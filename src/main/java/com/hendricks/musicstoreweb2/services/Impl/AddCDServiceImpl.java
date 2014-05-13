@@ -28,16 +28,10 @@ public class AddCDServiceImpl implements AddCDService{
     private Long id;
 
     @Override
-    public boolean addMusic(String album) {
-      List<Song> songs = new ArrayList<>();
+    public boolean addMusic(List<Song> songs, Double price, String artist) {
         
-        Song s  = new Song.Builder(1)
-                .setTitle(album)
-                .build();
-        
-        songs.add(s);
-        
-        CD cd = new CD.Builder("Killswitch Engage")
+        CD cd = new CD.Builder(artist)
+                .setPrice(price)
                 .setSongList(songs)
                 .build();
         
@@ -49,5 +43,33 @@ public class AddCDServiceImpl implements AddCDService{
         if(cd1.equals(cd)){
             return true;
         }else return false;
+    }
+
+    @Override
+    public CD find(Long id) {
+        return repo.findOne(id);
+    }
+
+    @Override
+    public CD persists(CD entity) {
+       return repo.save(entity);
+    }
+
+    @Override
+    public CD merge(CD entity) {
+       if(entity.getID()!=null){
+           return repo.save(entity);
+       }
+       else return null;
+    }
+
+    @Override
+    public void remove(CD entity) {
+      repo.delete(entity);
+    }
+
+    @Override
+    public List<CD> findAll() {
+        return repo.findAll();
     }
 }
