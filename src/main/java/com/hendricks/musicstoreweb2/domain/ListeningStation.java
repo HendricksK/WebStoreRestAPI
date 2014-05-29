@@ -28,9 +28,7 @@ public class ListeningStation implements Serializable{
 
 
     private ListeningStation() {
-    }
-
-    ;
+    };
     
     private ListeningStation(ListeningStation item) {
         this.album = item.album;

@@ -60,7 +60,7 @@ public class DigitalMusicRepositoryTest {
         Assert.assertNotNull(id);
     }
     
-    @Test(dependsOnMethods = "createDM")
+    @Test(dependsOnMethods = "createDM", enabled = false)
     public static void readDM(){
         repo = ctx.getBean(DigitalMusicRepository.class);
         DigitalMusic dm = repo.findOne(id);
@@ -68,7 +68,7 @@ public class DigitalMusicRepositoryTest {
        
     }
     
-    @Test(dependsOnMethods = "createDM")
+    @Test(dependsOnMethods = "createDM", enabled = false)
     public static void updateDM(){
         repo = ctx.getBean(DigitalMusicRepository.class);
         DigitalMusic dm = repo.findOne(id);

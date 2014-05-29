@@ -36,9 +36,7 @@ public class Artist implements Serializable{
     List<Album> albums;
 
     private Artist() {
-    }
-
-    ;
+    };
     
     private Artist(Builder item) {
         names = item.names;

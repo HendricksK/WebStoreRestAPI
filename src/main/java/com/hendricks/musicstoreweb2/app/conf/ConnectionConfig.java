@@ -28,7 +28,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @ComponentScan("com.hendricks.musicstoreweb2")
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "com.hendricks.musicstoreweb2.respository")
+@EnableJpaRepositories(basePackages = "com.hendricks.musicstoreweb2.repository")
 public class ConnectionConfig {
 
     @Bean

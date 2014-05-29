@@ -63,14 +63,14 @@ public class ArtistRepositoryTest {
                 
     }
     
-    @Test(dependsOnMethods = "createArtist")
+    @Test(dependsOnMethods = "createArtist", enabled = false)
     public void readArtist(){
         repo = ctx.getBean(ArtistRepository.class);
         Artist artist = repo.findOne(id);
         Assert.assertEquals(artist.getAlias(), "Dance Gavin Dance");
     }
     
-    @Test(dependsOnMethods = "createArtist")
+    @Test(dependsOnMethods = "createArtist", enabled = false)
     private void updateArtist(){
         repo = ctx.getBean(ArtistRepository.class);
         

@@ -59,7 +59,7 @@ public class CDRepositoryTest {
         Assert.assertNotNull(id);
     }
     
-    @Test(dependsOnMethods = "createCD")
+    @Test(dependsOnMethods = "createCD", enabled = false)
     public static void readCD(){
         repo = ctx.getBean(CDRepository.class);
         CD cd = repo.findOne(id);
@@ -67,7 +67,7 @@ public class CDRepositoryTest {
        
     }
     
-    @Test(dependsOnMethods = "createCD")
+    @Test(dependsOnMethods = "createCD", enabled = false)
     public static void updateCD(){
         repo = ctx.getBean(CDRepository.class);
         CD cd = repo.findOne(id);

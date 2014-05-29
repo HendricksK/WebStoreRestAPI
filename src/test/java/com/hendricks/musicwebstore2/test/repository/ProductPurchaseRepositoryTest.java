@@ -62,7 +62,7 @@ public class ProductPurchaseRepositoryTest {
                 
     }
     
-    @Test(dependsOnMethods="createPP")
+    @Test(dependsOnMethods="createPP", enabled = false)
     public static void readPP(){
         repo = ctx.getBean(ProductPurchaseRepository.class);
         
@@ -70,7 +70,7 @@ public class ProductPurchaseRepositoryTest {
         Assert.assertEquals(p.getID(), id);
     }
     
-    @Test(dependsOnMethods="createPP")
+    @Test(dependsOnMethods="createPP", enabled = false)
     public static void updatePP(){
          repo = ctx.getBean(ProductPurchaseRepository.class);
          
